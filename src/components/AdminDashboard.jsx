@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchAllUsers, fetchAllEnrollments, fetchAllCourses } from '../services/api'; // Asegúrate de tener estas funciones en tu servicio
+import { fetchAllUsers, fetchAllEnrollments, fetchAllSubjects } from '../services/api'; // Asegúrate de tener estas funciones en tu servicio
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
@@ -14,7 +14,7 @@ const AdminDashboard = () => {
             try {
                 const usersData = await fetchAllUsers();
                 const enrollmentsData = await fetchAllEnrollments();
-                const coursesData = await fetchAllCourses();
+                const coursesData = await fetchAllSubjects();
                 setUsers(usersData);
                 setEnrollments(enrollmentsData);
                 setCourses(coursesData);

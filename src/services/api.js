@@ -51,7 +51,7 @@ export const fetchAllUsers = async () => {
 };
 
 export const fetchAllEnrollments = async () => {
-  const response = await fetch(`${API_URL}/Admin/GetAllEnrollments`, {
+  const response = await fetch(`${API_URL}/Enrollment`, {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
@@ -61,8 +61,8 @@ export const fetchAllEnrollments = async () => {
   return response.json();
 };
 
-export const fetchAllCourses = async () => {
-  const response = await fetch(`${API_URL}/Admin/GetAllCourses`, {
+export const fetchAllSubjects = async () => {
+  const response = await fetch(`${API_URL}/Admin/Subjects`, {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
