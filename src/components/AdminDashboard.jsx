@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { fetchAllUsers, fetchAllEnrollments, fetchAllSubjects } from '../services/api'; // Asegúrate de tener estas funciones en tu servicio
+import { fetchAllUsers, fetchAllEnrollments, fetchAllSubjects } from '../services/api'; // Asegúrate de que estas funciones están correctamente definidas en api.js
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     const [enrollments, setEnrollments] = useState([]);
-    const [courses, setCourses] = useState([]);
+    const [subjects, setSubjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -14,10 +14,10 @@ const AdminDashboard = () => {
             try {
                 const usersData = await fetchAllUsers();
                 const enrollmentsData = await fetchAllEnrollments();
-                const coursesData = await fetchAllSubjects();
+                const subjectsData = await fetchAllSubjects();
                 setUsers(usersData);
                 setEnrollments(enrollmentsData);
-                setCourses(coursesData);
+                setSubjects(subjectsData);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -46,15 +46,15 @@ const AdminDashboard = () => {
                 <h2>Inscripciones</h2>
                 <ul>
                     {enrollments.map(enrollment => (
-                        <li key={enrollment.id}>{enrollment.title} - {enrollment.description}</li>
+                        <li key={enrollment.id}>{enrollment.courseName}</li>
                     ))}
                 </ul>
             </section>
             <section>
-                <h2>Cursos</h2>
+                <h2>Asignaturas</h2>
                 <ul>
-                    {courses.map(course => (
-                        <li key={course.id}>{course.name}</li>
+                    {subjects.map(subject => (
+                        <li key={subject.id}>{subject.title}</li>
                     ))}
                 </ul>
             </section>

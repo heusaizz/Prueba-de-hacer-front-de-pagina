@@ -1,23 +1,29 @@
+// src/components/Login.jsx
 import { useState } from 'react';
 import { authenticateUser  } from '../services/api';
+import UTNPNG from "../assets/UTNPNG.png";
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState(''); // Estado para el mensaje
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const token = await authenticateUser (username, password);
       localStorage.setItem('jwtToken', token); // Guarda el token en el localStorage
+      setMessage('Inicio de sesión exitoso'); // Mensaje de éxito
       // Redirigir a la página de dashboard (puedes usar react-router-dom para esto)
     } catch (error) {
       console.error('Error de autenticación:', error);
+      setMessage('Usuario o contraseña incorrectos'); // Mensaje de error
     }
   };
 
   return (
     <div className="login-container">
+      <img src={UTNPNG} alt="Logo de la UTN" style={{width: '135px', margin: '20px 0'}}/>
       <h1>Iniciar Sesión</h1>
       <form className="login-form" onSubmit={handleLogin}>
         <input
@@ -36,6 +42,7 @@ const Login = () => {
         />
         <button type="submit">Iniciar sesión</button>
       </form>
+      {message && <p>{message}</p>} {/* Muestra el mensaje si existe */}
     </div>
   );
 };

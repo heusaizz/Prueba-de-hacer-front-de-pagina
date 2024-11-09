@@ -1,7 +1,7 @@
 const API_URL = 'https://localhost:7251/api'; // Cambia esto según la URL de tu API
 
 // Función para autenticar al usuario
-export const authenticateUser  = async (username, password) => {
+export const authenticateUser   = async (username, password) => {
   try {
     const response = await fetch(`${API_URL}/Authentication/Authenticate`, {
       method: 'POST',
@@ -15,7 +15,6 @@ export const authenticateUser  = async (username, password) => {
       throw new Error('Error de autenticación');
     }
 
-    // Aquí asumimos que la respuesta es un token JWT
     const token = await response.text(); // Cambia a text() en lugar de json()
     console.log('Token JWT:', token);
     return token; // Devuelve el token directamente
@@ -25,15 +24,15 @@ export const authenticateUser  = async (username, password) => {
   }
 };
 
-// Función para obtener todos los usuarios (Ejemplo para el dashboard del administrador)
+// Función para obtener todos los usuarios
 export const fetchAllUsers = async () => {
-  const token = localStorage.getItem('token'); // Obtén el token del localStorage
+  const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
 
   try {
     const response = await fetch(`${API_URL}/Admin/GetAllUsers`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
         'Content-Type': 'application/json',
       },
     });
@@ -50,24 +49,52 @@ export const fetchAllUsers = async () => {
   }
 };
 
+// Función para obtener todas las inscripciones
 export const fetchAllEnrollments = async () => {
-  const response = await fetch(`${API_URL}/Enrollment`, {
+  const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
+
+  try {
+    const response = await fetch(`${API_URL}/Enrollment/GetAllEnrollment`, { // Cambiado a /Enrollments
       method: 'GET',
       headers: {
-          'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
-          'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
+        'Content-Type': 'application/json',
       },
-  });
-  return response.json();
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al obtener inscripciones');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
+// Función para obtener todas las asignaturas (cursos)
 export const fetchAllSubjects = async () => {
-  const response = await fetch(`${API_URL}/Admin/Subjects`, {
+  const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
+
+  try {
+    const response = await fetch(`${API_URL}/Subject/GetAllSubjects`, { // Cambiado a /Subjects
       method: 'GET',
       headers: {
-          'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
-          'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
+        'Content-Type': 'application/json',
       },
-  });
-  return response.json();
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al obtener asignaturas');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
