@@ -3,6 +3,8 @@ import Home from './components/Home';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import ClientDashboard from './components/ClientDashboard';
 import Login from './components/Login'; // Importa el componente Login
+import AdminDashboard from "./components/AdminDashboard";
+
 
 const App = () => {
     return (
@@ -13,6 +15,7 @@ const App = () => {
                     <li><Link to="/login">Iniciar Sesión</Link></li> {/* Agrega un enlace al Login */}
                     <li><Link to="/professor-dashboard">Dashboard del Profesor</Link></li>
                     <li><Link to="/client-dashboard">Dashboard del Estudiante</Link></li>
+                    <li><Link to="/admin-dashboard">Dashboard del Administrador</Link></li>
                 </ul>
             </nav>
             <Routes>
@@ -20,6 +23,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} /> {/* Agrega la ruta para el Login */}
                 <Route path="/professor-dashboard" element={<ProfessorDashboard />} />
                 <Route path="/client-dashboard" element={<ClientDashboard />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
             </Routes>
         </Router>
     );

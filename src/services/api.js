@@ -49,3 +49,25 @@ export const fetchAllUsers = async () => {
     throw error;
   }
 };
+
+export const fetchAllEnrollments = async () => {
+  const response = await fetch(`${API_URL}/Admin/GetAllEnrollments`, {
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+          'Content-Type': 'application/json',
+      },
+  });
+  return response.json();
+};
+
+export const fetchAllCourses = async () => {
+  const response = await fetch(`${API_URL}/Admin/GetAllCourses`, {
+      method: 'GET',
+      headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+          'Content-Type': 'application/json',
+      },
+  });
+  return response.json();
+};
