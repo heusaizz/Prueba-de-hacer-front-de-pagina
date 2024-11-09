@@ -1,4 +1,3 @@
-// src/components/Home.jsx
 import UTNPNG from "../assets/UTNPNG.png";
 
 const Home = () => {

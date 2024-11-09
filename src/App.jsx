@@ -1,11 +1,10 @@
-// src/App.jsx
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import ClientDashboard from './components/ClientDashboard';
 import Login from './components/Login';
 import AdminDashboard from "./components/AdminDashboard";
-import LogoutButton from './components/LogoutButton'; // Importa el LogoutButton
+import LogoutButton from './components/LogoutButton'; // Asegúrate de que este import esté presente
 import PrivateRoute from './routes/PrivateRoute'; // Importa el componente PrivateRoute
 import NoAccess from './routes/NoAccess'; // Importa la página de acceso denegado
 

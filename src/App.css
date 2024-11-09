@@ -2,11 +2,24 @@
 
 /* Estilos generales */
 #root {
-  max-width: 100%; /* Ancho completo */
-  margin: 0 auto; /* Centrado automático */
-  padding: 2rem;
-  text-align: center;
+  height: 100%; /* Ancho completo */
+  width: 100%;
+  display: flex; /* Centrado automático */
+  flex-direction: column;
 }
+
+html, body {
+  height: 100%; /* Asegúrate de que el html y el body ocupen toda la altura */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+* {
+  box-sizing: inherit; /* Aplica el box-sizing a todos los elementos */
+}
+
+
 
 nav {
   display: flex;
