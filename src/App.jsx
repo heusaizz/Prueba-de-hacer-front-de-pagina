@@ -1,16 +1,14 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './components/Home';
-import ProfessorDashboard from './components/ProfessorDashboard';
-import ClientDashboard from './components/ClientDashboard';
+import AdminView from './components/AdminView'; // Importa AdminView
+import ClientView from './components/ClientView'; // Importa ClientView
+import ProfessorView from './components/ProfessorView'; // Importa ProfessorView
 import Login from './components/Login';
-import AdminDashboard from "./components/AdminDashboard";
-import LogoutButton from './components/LogoutButton'; // Asegúrate de que este import esté presente
-import PrivateRoute from './routes/PrivateRoute'; // Importa el componente PrivateRoute
-import NoAccess from './routes/NoAccess'; // Importa la página de acceso denegado
-import Navbar from './components/Navbar';
+import LogoutButton from './components/LogoutButton';
+import PrivateRoute from './routes/PrivateRoute';
+import NoAccess from './routes/NoAccess';
 
 const App = () => {
-    // Verifica si el usuario está autenticado
     const isLoggedIn = !!localStorage.getItem('jwtToken');
 
     return (
@@ -21,10 +19,10 @@ const App = () => {
                     <li><Link to="/login">Iniciar Sesión</Link></li>
                     {isLoggedIn && (
                         <>
-                            <li><Link to="/professor-dashboard">Profesor</Link></li>
-                            <li><Link to="/client-dashboard">Estudiante</Link></li>
-                            <li><Link to="/admin-dashboard">Administrador</Link></li>
-                            <LogoutButton /> {/* Renderiza el botón de cerrar sesión solo si está logueado */}
+                            <li><Link to="/admin-view">Administrador</Link></li>
+                            <li><Link to="/client-view">Estudiante</Link></li>
+                            <li><Link to="/professor-view">Profesor</Link></li>
+                            <LogoutButton /> {/* Incluye el botón de cerrar sesión */}
                         </>
                     )}
                 </ul>
@@ -33,30 +31,30 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route 
-                    path="/professor-dashboard" 
+                    path="/admin-view" 
                     element={
                         <PrivateRoute>
-                            <ProfessorDashboard />
+                            <AdminView />
                         </PrivateRoute>
                     } 
                 />
                 <Route 
-                    path="/client-dashboard" 
+                    path="/client-view" 
                     element={
                         <PrivateRoute>
-                            <ClientDashboard />
+                            <ClientView />
                         </PrivateRoute>
                     } 
                 />
                 <Route 
-                    path="/admin-dashboard" 
+                    path="/professor-view" 
                     element={
                         <PrivateRoute>
-                            <AdminDashboard />
+                            <ProfessorView />
                         </PrivateRoute>
                     } 
                 />
-                <Route path="/no-access" element={<NoAccess />} /> {/* Ruta para acceso denegado */}
+                <Route path="/no-access" element={<NoAccess />} />
             </Routes>
         </Router>
     );
