@@ -32,7 +32,7 @@ const ClientDashboard = () => {
     }, []);
 
     return (
-        <div>
+        <div className="client-dashboard">
             <h1>Dashboard del Estudiante</h1>
             <h2>Mis Inscripciones</h2>
             <ul>

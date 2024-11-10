@@ -7,6 +7,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import LogoutButton from './components/LogoutButton'; // Asegúrate de que este import esté presente
 import PrivateRoute from './routes/PrivateRoute'; // Importa el componente PrivateRoute
 import NoAccess from './routes/NoAccess'; // Importa la página de acceso denegado
+import Navbar from './components/Navbar';
 
 const App = () => {
     // Verifica si el usuario está autenticado
@@ -20,9 +21,9 @@ const App = () => {
                     <li><Link to="/login">Iniciar Sesión</Link></li>
                     {isLoggedIn && (
                         <>
-                            <li><Link to="/professor-dashboard">Dashboard del Profesor</Link></li>
-                            <li><Link to="/client-dashboard">Dashboard del Estudiante</Link></li>
-                            <li><Link to="/admin-dashboard">Dashboard del Administrador</Link></li>
+                            <li><Link to="/professor-dashboard">Profesor</Link></li>
+                            <li><Link to="/client-dashboard">Estudiante</Link></li>
+                            <li><Link to="/admin-dashboard">Administrador</Link></li>
                             <LogoutButton /> {/* Renderiza el botón de cerrar sesión solo si está logueado */}
                         </>
                     )}
