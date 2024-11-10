@@ -103,24 +103,30 @@ export const createUser  = async (userData) => {
   const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
 
   try {
-      const response = await fetch(`${API_URL}/Admin/CreateUser `, {
-          method: 'POST',
-          headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
-      });
+    const response = await fetch(`${API_URL}/Admin/CreateUser`, { // Eliminar espacio
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: userData.name,
+        username: userData.username,
+        password: userData.password,
+        email: userData.email,
+        role: userData.role // Asegúrate de que sea un número
+      }),
+    });
 
-      if (!response.ok) {
-          throw new Error('Error al crear el usuario');
-      }
+    if (!response.ok) {
+      throw new Error('Error al crear el usuario');
+    }
 
-      const data = await response.json();
-      return data; // Devuelve los datos del nuevo usuario
+    const data = await response.json();
+    return data; // Devuelve los datos del nuevo usuario
   } catch (error) {
-      console.error(error);
-      throw error;
+    console.error(error);
+    throw error;
   }
 };
 
@@ -129,48 +135,52 @@ export const updateUser  = async (id, userData) => {
   const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
 
   try {
-      const response = await fetch(`${API_URL}/Admin/UpdateUser /${id}`, {
-          method: 'PUT',
-          headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
-      });
+    const response = await fetch(`${API_URL}/Admin/UpdateUser/${id}`, { // Eliminar espacio
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: userData.username,
+        password: userData.password,
+        email: userData.email,
+        role: userData.role // Asegúrate de que sea un número
+      }),
+    });
 
-      if (!response.ok) {
-          throw new Error('Error al actualizar el usuario');
-      }
+    if (!response.ok) {
+      throw new Error('Error al actualizar el usuario');
+    }
 
-      const data = await response.json();
-      return data; // Devuelve los datos del usuario actualizado
+    const data = await response.json();
+    return data; // Devuelve los datos del usuario actualizado
   } catch (error) {
-      console.error(error);
-      throw error;
+    console.error(error);
+    throw error;
   }
 };
 
-// Función para eliminar un usuario
 export const deleteUser  = async (id) => {
   const token = localStorage.getItem('jwtToken'); // Obtén el token del localStorage
 
   try {
-      const response = await fetch(`${API_URL}/Admin/DeleteUser /${id}`, {
-          method: 'DELETE',
-          headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-          },
-      });
+    const response = await fetch(`${API_URL}/Admin/DeleteUser/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
-      if (!response.ok) {
-          throw new Error('Error al eliminar el usuario');
-      }
+    if (!response.ok) {
+      throw new Error('Error al eliminar el usuario');
+    }
 
-      return true; // Devuelve true si la eliminación fue exitosa
+    return true; // Devuelve true si la eliminación fue exitosa
   } catch (error) {
-      console.error(error);
-      throw error;
+    console.error(error);
+    throw error;
   }
 };
 

@@ -59,11 +59,12 @@ const AdminDashboard = () => {
         try {
             await deleteUser (id);
             const usersData = await fetchAllUsers();
-            setUsers(usersData); // Recargar usuarios después de eliminar
+            setUsers(usersData);
         } catch (error) {
-            console.error('Error al eliminar el usuario:', error);
+            console.error("Error al eliminar el usuario: ", error);
         }
-    };
+    }
+
 
     if (loading) return <div>Cargando...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -78,29 +79,55 @@ const AdminDashboard = () => {
 
             {showForm && (
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleFormChange}
-                        placeholder="Nombre"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="role"
-                        value={formData.role}
-                        onChange={handleFormChange}
-                        placeholder="Rol"
-                        required
-                    />
-                    <input
-                        type="hidden"
-                        name="id"
-                        value={formData.id}
-                    />
-                    <button type="submit">Enviar</button>
-                </form>
+                <input 
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleFormChange}
+                    placeholder='Nombre de la persona'
+                    required
+                />
+                <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleFormChange}
+                    placeholder="Nombre de usuario"
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleFormChange}
+                    placeholder="Contraseña"
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
+                    placeholder="Correo electrónico"
+                    required
+                />
+                <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleFormChange}
+                    required
+                >
+                    <option value="0">Rol Admin</option>
+                    <option value="1">Rol Alumno</option>
+                    <option value="2">Rol Profesor</option>
+                </select>
+                <input
+                    type="hidden"
+                    name="id"
+                    value={formData.id}
+                />
+                <button type="submit">Enviar</button>
+            </form>
             )}
 
             <section>
@@ -108,7 +135,7 @@ const AdminDashboard = () => {
                 <ul>
                     {users.map(user => (
                         <li key={user.id}>
-                            {user.name} - {user.role}
+                            {user.name} - {user.username} - {user.role}
                             <button onClick={() => setFormData({ name: user.name, role: user.role, id: user.id })}>Editar</button>
                             <button onClick={() => handleDelete(user.id)}>Eliminar</button>
                         </li>
@@ -120,7 +147,7 @@ const AdminDashboard = () => {
                 <h2>Usuarios</h2>
                 <ul>
                     {users.map(user => (
-                        <li key={user.id}>{user.name} - {user.role}</li>
+                        <li key={user.id}>{user.name} - {user.role}  <h3>Legajo: </h3> {user.id}</li>
                     ))}
                 </ul>
             </section>
@@ -128,7 +155,7 @@ const AdminDashboard = () => {
                 <h2>Inscripciones</h2>
                 <ul>
                     {enrollments.map(enrollment => (
-                        <li key={enrollment.id}>{enrollment.courseName}</li>
+                        <li key={enrollment.id}>{enrollment.subjectTitle} <h3>Legajo: </h3> {enrollment.clientId} </li>
                     ))}
                 </ul>
             </section>
